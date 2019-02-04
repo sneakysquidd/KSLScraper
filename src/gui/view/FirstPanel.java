@@ -35,7 +35,7 @@ public class FirstPanel extends JPanel
         resButton = new JButton("Reset");
         appLayout.putConstraint(SpringLayout.EAST, resButton, -357, SpringLayout.EAST, this);
        
-        input = new JTextField("Number of people");
+        input = new JTextField("");
         appLayout.putConstraint(SpringLayout.NORTH, genButton, 35, SpringLayout.NORTH, input);
         appLayout.putConstraint(SpringLayout.WEST, genButton, 105, SpringLayout.EAST, input);
         appLayout.putConstraint(SpringLayout.WEST, input, 194, SpringLayout.WEST, this);
@@ -101,7 +101,16 @@ public class FirstPanel extends JPanel
         		
         		
 		    }
-        });   
+        });
+		
+		resButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				input.setText("");
+				output.setText("");
+			}
+		});
 				
 	}
 }
