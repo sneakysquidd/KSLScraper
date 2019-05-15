@@ -21,7 +21,7 @@ public class FirstFrame extends JFrame
 	{
 		this.setContentPane(appPanel);
 		this.setSize(800, 800);
-		this.setTitle("Code to Success");
+		this.setTitle("Final");
 		this.setResizable(false);
 		this.setVisible(true);
 	}
