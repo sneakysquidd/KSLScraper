@@ -3,16 +3,16 @@ package gui.view;
 import javax.swing.JFrame;
 import gui.controller.GUIController;
 
-public class FirstFrame extends JFrame
+public class WebFrame extends JFrame
 {
 	private GUIController appController;
-	private FirstPanel appPanel;
+	private WebPanel appPanel;
 	
-	public FirstFrame(GUIController appController)
+	public WebFrame(GUIController appController)
 	{
 		super();
 		this.appController = appController;
-		this.appPanel = new FirstPanel(appController);
+		this.appPanel = new WebPanel(appController);
 		
 		setupFrame();
 	}

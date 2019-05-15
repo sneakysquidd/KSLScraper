@@ -9,12 +9,12 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FirstPanel extends JPanel
+public class WebPanel extends JPanel
 {
 	private SpringLayout appLayout;
 	private GUIController appController;
 	
-	public FirstPanel(GUIController appController)
+	public WebPanel(GUIController appController)
 	{
 		super();
         this.appController = appController;        

@@ -6,18 +6,18 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import gui.model.Minion;
-import gui.view.FirstFrame;
+import gui.view.WebFrame;
 
 public class GUIController
 {
 	private Minion myMinion;
-	private FirstFrame appFrame;
+	private WebFrame appFrame;
 	
 	public GUIController()
 	{
 		myMinion = new Minion();
 
-		appFrame = new FirstFrame(this);
+		appFrame = new WebFrame(this);
 	}
 	
 	public void start()
