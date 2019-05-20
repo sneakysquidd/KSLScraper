@@ -12,6 +12,17 @@ public class WebPanel extends JPanel
 	private CardLayout appLayout;
 	private GUIController appController;
 
+    private JTextField desiredFromPrice;
+    private JTextField desiredToPrice;
+    private JTextField desiredItem;
+    private JTextField desiredZip;
+
+    private JLabel fromLabel;
+    private JLabel toLabel;
+    private JLabel itemLabel;
+    private JLabel zipLabel;
+
+
 
 	
 	public WebPanel(GUIController appController)
