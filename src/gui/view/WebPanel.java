@@ -28,6 +28,8 @@ public class WebPanel extends JPanel
 	private JPanel searchPanel;
 	private JPanel viewPanel;
 	private SpringLayout sl_searchPanel;
+	
+	private JScrollPane itemScroll;
 
 	public WebPanel(GUIController appController)
 	{
@@ -36,6 +38,8 @@ public class WebPanel extends JPanel
         appLayout = new CardLayout();
         panels = new JPanel(new CardLayout());
 
+        this.itemScroll = new JScrollPane();
+        
         this.desiredFromPrice = new JTextField();
         desiredFromPrice.setColumns(8);
         this.desiredToPrice = new JTextField();
@@ -94,6 +98,7 @@ public class WebPanel extends JPanel
 		searchPanel.add(toLabel);
 		searchPanel.add(itemLabel);
 		searchPanel.add(zipLabel);
+	
 		this.desiredItem = new JTextField();
 		sl_searchPanel.putConstraint(SpringLayout.EAST, desiredItem, 0, SpringLayout.EAST, desiredFromPrice);
 		desiredItem.setColumns(8);
@@ -107,6 +112,7 @@ public class WebPanel extends JPanel
 		desiredZip.setColumns(8);
 		searchPanel.add(desiredZip);
 		searchPanel.add(searchButton);
+		viewPanel.add(itemScroll);
 	}
 	
 	private void setupLayout()
