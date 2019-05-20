@@ -1,14 +1,16 @@
 package gui.view;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+
 import gui.controller.GUIController;
 
 public class WebFrame extends JFrame
 {
 	private GUIController appController;
 	private WebPanel appPanel;
-	
-	public WebFrame(GUIController appController)
+    private JPanel panel1;
+
+    public WebFrame(GUIController appController)
 	{
 		super();
 		this.appController = appController;

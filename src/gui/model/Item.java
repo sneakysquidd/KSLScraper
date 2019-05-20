@@ -1,29 +1,58 @@
 package gui.model;
 
-import java.math.BigDecimal;
+import javax.swing.*;
 
 public class Item
 {
 	private String title;
-	private BigDecimal price;
+	private String price;
 	private String url;
-	
-	public String getTitle() {
+	private ImageIcon img;
+
+	public Item()
+	{
+	//Constructor
+	}
+
+	public Item(String Title, String Price, String url, ImageIcon img)
+	{
+
+	}
+
+
+
+	public String getTitle()
+	{
 		return title;
 	}
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		this.title = title;
 	}
-	public BigDecimal getPrice() {
+	public String getPrice()
+	{
 		return price;
 	}
-	public void setPrice(BigDecimal price) {
+	public void setPrice(String price)
+	{
 		this.price = price;
 	}
-	public String getUrl() {
+	public String getUrl()
+	{
 		return url;
 	}
-	public void setUrl(String url) {
+	public void setUrl(String url)
+	{
 		this.url = url;
+	}
+
+	public ImageIcon getImage()
+	{
+		return img;
+	}
+
+	public void setImage(ImageIcon img)
+	{
+		this.img = img;
 	}
 }
