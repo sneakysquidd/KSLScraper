@@ -8,14 +8,14 @@ public class Item
 	private String title;
 	private String price;
 	private String url;
-	private BufferedImage img;
+	private String img;
 
 	public Item()
 	{
 	//Constructor
 	}
 
-	public Item(String Title, String Price, String URL, BufferedImage image)
+	public Item(String Title, String Price, String URL, String image)
 	{
 		this.title = Title;
 		this.price = Price;
@@ -49,12 +49,12 @@ public class Item
 		this.url = url;
 	}
 
-	public BufferedImage getImage()
+	public String getImage()
 	{
 		return img;
 	}
 
-	public void setImage(BufferedImage img)
+	public void setImage(String img)
 	{
 		this.img = img;
 	}

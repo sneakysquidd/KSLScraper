@@ -18,7 +18,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 
 import gui.model.Item;
 import gui.view.WebFrame;
@@ -40,7 +44,7 @@ public class GUIController
 	}
 
 
-	public static void searchForItem(String Item, String fromPrice, String toPrice, String zipCode)
+	public void searchForItem(String Item, String fromPrice, String toPrice, String zipCode)
 	{
 		final WebClient client = new WebClient(BrowserVersion.CHROME);
 
@@ -106,7 +110,8 @@ public class GUIController
 						    image = "https://" + (imgs.get(i+1).getAttribute("src"));
 					    }
 					    System.out.println(image);
-                     //   ItemArr[i].setImage(getBufferedImage(image));
+					    //saveImage(image, "./images");
+                        ItemArr[i].setImage((image));
 				}
 			}
 		}
@@ -118,11 +123,28 @@ public class GUIController
 
 
 	//Method to get an image from a URL
-    public static BufferedImage getBufferedImage(String Url) throws IOException
-    {
-        URL url = new URL(Url);
-        BufferedImage image = ImageIO.read(url);
-        return image;
-    }
+	public static void saveImage(String imageUrl, String destinationFile) throws IOException {
+		URL url = new URL(imageUrl);
+		
+		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.0.2.100", 80));
+
+	    HttpURLConnection connection =
+	        (HttpURLConnection)new URL(imageUrl).openConnection(proxy);
+	    ((HttpURLConnection)new URL(imageUrl).openConnection(proxy)).getInputStream();
+		InputStream is = url.openStream();
+		OutputStream os = new FileOutputStream(destinationFile);
+
+		System.out.println(connection.usingProxy());
+		
+		byte[] b = new byte[2048];
+		int length;
+
+		while ((length = is.read(b)) != -1) {
+			os.write(b, 0, length);
+		}
+
+		is.close();
+		os.close();
+	}
 }
 
