@@ -14,11 +14,13 @@ public class Item
 	//Constructor
 	}
 
-	public Item(String Title, String Price, String url, ImageIcon img)
+	public Item(String Title, String Price, String URL, ImageIcon image)
 	{
-
+		this.title = Title;
+		this.price = Price;
+		this.url = URL;
+		this.img = image;
 	}
-
 
 
 	public String getTitle()
