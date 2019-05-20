@@ -1,7 +1,6 @@
 package gui.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 import gui.controller.GUIController;
@@ -11,15 +10,20 @@ import java.awt.event.ActionEvent;
 
 public class WebPanel extends JPanel
 {
-	private SpringLayout appLayout;
+	private CardLayout appLayout;
 	private GUIController appController;
+
+	private JTextField desiredFromPrice;
+	private JTextField desiredToPrice;
+	private JTextField desiredItem;
+	private JTextField desiredZip;
 	
 	public WebPanel(GUIController appController)
 	{
 		super();
         this.appController = appController;        
         
-        appLayout = new SpringLayout();
+        appLayout = new CardLayout();
        
 
 

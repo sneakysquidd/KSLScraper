@@ -8,13 +8,15 @@ public class WebFrame extends JFrame
 {
 	private GUIController appController;
 	private WebPanel appPanel;
-    private JPanel panel1;
+    private JPanel SearchPanel;
+    private JPanel WebPanel;
 
     public WebFrame(GUIController appController)
 	{
 		super();
 		this.appController = appController;
 		this.appPanel = new WebPanel(appController);
+
 		
 		setupFrame();
 	}

@@ -106,7 +106,7 @@ public class GUIController
 						    image = "https://" + (imgs.get(i+1).getAttribute("src"));
 					    }
 					    System.out.println(image);
-                        ItemArr[i].setImage(getImage(image));
+                     //   ItemArr[i].setImage(getBufferedImage(image));
 				}
 			}
 		}
@@ -114,16 +114,15 @@ public class GUIController
 		{
 		  e.printStackTrace();
 		}
-		}
+	}
 
 
 	//Method to get an image from a URL
-    public static BufferedImage getImage(String Url) throws IOException
+    public static BufferedImage getBufferedImage(String Url) throws IOException
     {
         URL url = new URL(Url);
         BufferedImage image = ImageIO.read(url);
         return image;
     }
-
-	}
+}
 
