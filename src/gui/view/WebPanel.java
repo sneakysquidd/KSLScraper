@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 import gui.controller.GUIController;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -13,10 +12,7 @@ public class WebPanel extends JPanel
 	private CardLayout appLayout;
 	private GUIController appController;
 
-	private JTextField desiredFromPrice;
-	private JTextField desiredToPrice;
-	private JTextField desiredItem;
-	private JTextField desiredZip;
+
 	
 	public WebPanel(GUIController appController)
 	{
