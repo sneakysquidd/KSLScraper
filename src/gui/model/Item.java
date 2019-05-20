@@ -1,20 +1,21 @@
 package gui.model;
 
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 
 public class Item
 {
 	private String title;
 	private String price;
 	private String url;
-	private ImageIcon img;
+	private BufferedImage img;
 
 	public Item()
 	{
 	//Constructor
 	}
 
-	public Item(String Title, String Price, String URL, ImageIcon image)
+	public Item(String Title, String Price, String URL, BufferedImage image)
 	{
 		this.title = Title;
 		this.price = Price;
@@ -48,12 +49,12 @@ public class Item
 		this.url = url;
 	}
 
-	public ImageIcon getImage()
+	public BufferedImage getImage()
 	{
 		return img;
 	}
 
-	public void setImage(ImageIcon img)
+	public void setImage(BufferedImage img)
 	{
 		this.img = img;
 	}
