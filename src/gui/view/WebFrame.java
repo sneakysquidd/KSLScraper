@@ -11,6 +11,10 @@ public class WebFrame extends JFrame
     private JPanel SearchPanel;
     private JPanel WebPanel;
 
+    /**
+     * Constructor used to initialize frame components
+     * @param appController
+     */
     public WebFrame(GUIController appController)
 	{
 		super();

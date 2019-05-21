@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"gui.controller","l":"GUIController"}]

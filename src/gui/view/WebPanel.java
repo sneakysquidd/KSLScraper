@@ -33,7 +33,12 @@ public class WebPanel extends JPanel
 	
 	private JScrollPane itemScroll;
 	private JTextArea itemsText;
+
 	
+	/**
+	 * WebPanel is the constructor for the GUI panel and is used to initialize all the GUI components required for the project
+	 * @param appController
+	 */
 	public WebPanel(GUIController appController)
 	{
 		super();
@@ -62,7 +67,7 @@ public class WebPanel extends JPanel
         this.itemLabel = new JLabel();
         this.zipLabel = new JLabel();
         this.loadButton = new JButton("Load Previous Results");
-                this.searchButton = new JButton();
+        this.searchButton = new JButton();
                 
         setupPanel();
         setupLayout();
@@ -71,6 +76,9 @@ public class WebPanel extends JPanel
         
 	}
 	
+	/**
+	 * used to add all the GUI components to the panel shown on the frame
+	 */
 	private void setupPanel()
 	{
 		this.setPreferredSize(new Dimension(800, 500));
@@ -93,7 +101,9 @@ public class WebPanel extends JPanel
 		this.add(loadButton);
 		      
 	}
-	
+	/**
+	 * sets all of the constraints for the GUI components
+	 */
 	private void setupLayout()
 	{
         fromLabel.setText("Lowest Price");
@@ -146,7 +156,9 @@ public class WebPanel extends JPanel
 	}
 	
 
-	
+	/**
+	 * adds listeners for the buttons in the project to add functionality to them
+	 */
 	private void setupListeners()
 	{
 		searchButton.addActionListener(new ActionListener()

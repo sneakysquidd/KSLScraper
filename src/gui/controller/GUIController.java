@@ -42,17 +42,30 @@ public class GUIController
 	private WebFrame appFrame;
 	private String saveFile = "searchResults.ksl";
 	
+	/**
+	 * Constructor initializes frame into the project
+	 */
 	public GUIController()
 	{
 		appFrame = new WebFrame(this);
 	}
 	
+	/**
+	 * used to test search/webscraping with hard coded parameters
+	 */
 	public void start()
 	{
 		//searchForItem("iphone", "1", "2", "84020");
 	}
 
-
+    /**
+     * Uses HTMLUnit to scrape KSL classifieds and retrieve items based on search parameters
+     * @param Item The item to search for on KSL
+     * @param fromPrice the lowest price to search for
+     * @param toPrice the highest price to search for
+     * @param zipCode The zipcode to search from on KSL
+     * @return This method returns an Item array containing all of the items found from scraping KSL
+     */
 	public Item[] searchForItem(String Item, String fromPrice, String toPrice, String zipCode)
 	{
 		final WebClient client = new WebClient(BrowserVersion.CHROME);
@@ -133,7 +146,12 @@ public class GUIController
 	}
 
 
-	//Method to get an image from a URL
+	/**
+	 * Saves images found from KSL using webscraper
+	 * @param imageUrl Gets the image url for each image to download
+	 * @param destinationFile Specifies which file to save the images to
+	 * @throws IOException Needs to throw exception to work with files
+	 */
 	public static void saveImage(String imageUrl, String destinationFile) throws IOException {
 		URL url = new URL(imageUrl);
 		
@@ -158,7 +176,11 @@ public class GUIController
 		os.close();
 	}
 	
-	
+	/**
+	 * saves the results in the textArea on the GUI to a specified file
+	 * @param textArea Specifies the Text area to save the text from
+	 * @throws Exception Needs to throw an exception in order to work with files.
+	 */
 	public void saveAs(JTextArea textArea) throws Exception
 	{
 	      FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Results File", "ksl");
@@ -190,6 +212,11 @@ public class GUIController
 	         ex.printStackTrace();
 	      } 
 	   }
+	/**
+	 * Loads previously saved results into the text area on the GUI
+	 * @param textArea The text area that the program loads the file into
+	 * @throws Exception Must throw exception to work with files
+	 */
 	
 	public void loadResults(JTextArea textArea) throws Exception
 	{
