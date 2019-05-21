@@ -154,7 +154,35 @@ public class WebPanel extends JPanel
 
         //doc.addStyle(name, null);
 	}
-	
+	/**
+	 * This method is what gets the path for where you are saving or loading a file from.
+	 * @param choice It takes the directory choice for the path.
+	 * @return It returns the path for the file.
+	 */
+	private String getPath(String choice)
+	{
+		String path = ".";
+		int result = -99;
+		JFileChooser fileChooser = new JFileChooser();
+		if(choice.equals("save"))
+		{
+			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			result = fileChooser.showSaveDialog(this);
+			if(result == JFileChooser.APPROVE_OPTION)
+			{
+				path = fileChooser.getCurrentDirectory().getAbsolutePath();
+			}
+		}
+		else
+		{
+			result = fileChooser.showOpenDialog(this);
+			if(result == JFileChooser.APPROVE_OPTION)
+			{
+				path = fileChooser.getSelectedFile().getAbsolutePath();
+			}
+		}
+		return path;
+	}
 
 	/**
 	 * adds listeners for the buttons in the project to add functionality to them
@@ -187,29 +215,37 @@ public class WebPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				try 
+				String wordText = itemsText.getText();
+				//the . assigns the save to the current directory
+				String path = getPath("save");
+				try
 				{
-					appController.saveAs(itemsText);
-				} catch (Exception e) 
+					appController.saveAs((itemsText.getText()), path);
+				} catch (Exception e)
 				{
-					
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("saved");
+				itemsText.setText("Word saved!");
 			}
 		});
 		
 		loadButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String items = "File Not loaded Correctly";
+				String path = getPath("load");
+				try
 				{
-					public void actionPerformed(ActionEvent click)
-					{
-						try {
-							appController.loadResults(itemsText);
-						} catch (Exception e) {
-							
-							e.printStackTrace();
-						}
-					}
-				});
+					items = appController.loadResults(path);
+				} catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				itemsText.setText(items);
+			}
+		});
 	}
 }

@@ -181,76 +181,55 @@ public class GUIController
 	 * @param textArea Specifies the Text area to save the text from
 	 * @throws Exception Needs to throw an exception in order to work with files.
 	 */
-	public void saveAs(JTextArea textArea) throws Exception
+	public void saveAs(String textSave, String path) throws Exception
 	{
-	      FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Results File", "ksl");
-	      final JFileChooser saveAsFileChooser = new JFileChooser();
-	      saveAsFileChooser.setApproveButtonText("Save");
-	      saveAsFileChooser.setFileFilter(extensionFilter);
-	      int actionDialog = saveAsFileChooser.showOpenDialog(appFrame);
-	      if (actionDialog != JFileChooser.APPROVE_OPTION) 
-	      {
-	         return;
-	      }
+		try
+		{
+			String filename = path;
+			Calendar date = Calendar.getInstance();
+			filename += "/" + date.get(Calendar.MONTH) + " " + date.get(Calendar.DAY_OF_MONTH);
+			filename += date.get(Calendar.HOUR) + "-" + date.get(Calendar.MINUTE);
+			filename += " KSLResults.txt";
+			
+			File saveFile = new File(filename);
+			FileOutputStream saveStream = new FileOutputStream(saveFile);
+			ObjectOutputStream output = new ObjectOutputStream(saveStream);
 
-	      File file = saveAsFileChooser.getSelectedFile();
-	      if (!file.getName().endsWith(".ksl")) 
-	      {
-	         file = new File(file.getAbsolutePath() + ".ksl");
-	      }
+			output.writeObject(textSave);
+			output.close();
+			saveStream.close();
+			
+			
+		}
+		catch(IOException error)
+		{
 
-	      FileOutputStream fout=new FileOutputStream(file);  
-	      ObjectOutputStream out=new ObjectOutputStream(fout); 
-	      try 
-	      {
-	         out.writeObject(textArea);
-	         out.flush();
-	         out.close();
+		}
 
-	      } catch (IOException ex) 
-	      {
-	         ex.printStackTrace();
-	      } 
-	   }
+	}
 	/**
 	 * Loads previously saved results into the text area on the GUI
 	 * @param textArea The text area that the program loads the file into
 	 * @throws Exception Must throw exception to work with files
 	 */
 	
-	public void loadResults(JTextArea textArea) throws Exception
+	public String loadResults(String path) throws Exception
 	{
-		FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Results File", "ksl");
-	      final JFileChooser loadFileChooser = new JFileChooser();
-	      loadFileChooser.setApproveButtonText("Save");
-	      loadFileChooser.setFileFilter(extensionFilter);
-	      int actionDialog = loadFileChooser.showOpenDialog(appFrame);
-	      if (actionDialog != JFileChooser.APPROVE_OPTION) 
-	      {
-	         return;
-	      }
-	      
-	      File file = loadFileChooser.getSelectedFile();
-	      if (!file.getName().endsWith(".ksl")) 
-	      {
-	         file = new File(file.getAbsolutePath() + ".ksl");
-	      }
+		String saved = "";
+		try
+		{
+			File saveFile = new File(path);
+			FileInputStream inputStream = new FileInputStream(saveFile);
+			ObjectInputStream input = new ObjectInputStream(inputStream);
+			saved = (String) input.readObject();
+			input.close();
+			inputStream.close();
+		}
+		catch(IOException error)
+		{
 
-	      List<Object> results = new ArrayList<Object>();
-	      FileInputStream fis = new FileInputStream(file);
-	      ObjectInputStream ois = new ObjectInputStream(fis);
-
-	      try {
-	          while (true) {
-	              String result = (String) ois.readObject();
-	              textArea.append(result);
-	          }
-	      } catch (java.io.OptionalDataException e) {
-	          if (!e.eof) 
-	              throw e;
-	      } finally {
-	          ois.close();
-	      }
+		}
+		return saved;
 	}
 }
 
