@@ -42,6 +42,7 @@ public class WebPanel extends JPanel
 	public WebPanel(GUIController appController)
 	{
 		super();
+		setBackground(new Color(102, 204, 255));
         this.appController = appController;
         appLayout = new SpringLayout();
         this.itemScroll = new JScrollPane();
@@ -58,6 +59,8 @@ public class WebPanel extends JPanel
         this.desiredZip = new JTextField();
         appLayout.putConstraint(SpringLayout.EAST, desiredZip, -52, SpringLayout.EAST, this);
         this.saveButton = new JButton("Save Results");
+        appLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, desiredFromPrice);
+        appLayout.putConstraint(SpringLayout.WEST, saveButton, 330, SpringLayout.WEST, this);
         this.logo = new JLabel();
         logo.setEnabled(false);
         //logo.setIcon(new ImageIcon(WebPanel.class.getResource("/Images/kslLogo.png")));
@@ -67,7 +70,14 @@ public class WebPanel extends JPanel
         this.itemLabel = new JLabel();
         this.zipLabel = new JLabel();
         this.loadButton = new JButton("Load Previous Results");
+        appLayout.putConstraint(SpringLayout.EAST, saveButton, -51, SpringLayout.WEST, loadButton);
+        appLayout.putConstraint(SpringLayout.NORTH, loadButton, 6, SpringLayout.SOUTH, desiredToPrice);
+        appLayout.putConstraint(SpringLayout.WEST, loadButton, 513, SpringLayout.WEST, this);
+        appLayout.putConstraint(SpringLayout.EAST, loadButton, -106, SpringLayout.EAST, this);
         this.searchButton = new JButton();
+        appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredFromPrice);
+        appLayout.putConstraint(SpringLayout.WEST, searchButton, 29, SpringLayout.WEST, desiredItem);
+        appLayout.putConstraint(SpringLayout.EAST, searchButton, -68, SpringLayout.WEST, saveButton);
                 
         setupPanel();
         setupLayout();
@@ -141,16 +151,8 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.SOUTH, itemScroll, -23, SpringLayout.SOUTH, this);
         appLayout.putConstraint(SpringLayout.EAST, itemScroll, -24, SpringLayout.EAST, this);
 		itemScroll.setBorder(new LineBorder(Color.BLUE));
-		appLayout.putConstraint(SpringLayout.WEST, loadButton, 611, SpringLayout.WEST, this);
-        appLayout.putConstraint(SpringLayout.EAST, saveButton, -55, SpringLayout.WEST, loadButton);
         appLayout.putConstraint(SpringLayout.WEST, toLabel, 107, SpringLayout.EAST, fromLabel);
         appLayout.putConstraint(SpringLayout.EAST, toLabel, 0, SpringLayout.EAST, desiredToPrice);
-        appLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, desiredToPrice);
-		appLayout.putConstraint(SpringLayout.WEST, saveButton, 55, SpringLayout.EAST, searchButton);
-        appLayout.putConstraint(SpringLayout.NORTH, loadButton, 0, SpringLayout.NORTH, searchButton);
-        appLayout.putConstraint(SpringLayout.EAST, searchButton, 0, SpringLayout.EAST, desiredFromPrice);
-        appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredItem);
-        appLayout.putConstraint(SpringLayout.WEST, searchButton, 0, SpringLayout.WEST, desiredItem);
 
         //doc.addStyle(name, null);
 	}
