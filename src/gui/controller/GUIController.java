@@ -17,6 +17,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -27,10 +28,13 @@ import gui.model.Item;
 import gui.view.WebFrame;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 public class GUIController
 {
 	private WebFrame appFrame;
+	private String saveFile = "searchResults.txt";
 	
 	public GUIController()
 	{
@@ -146,6 +150,23 @@ public class GUIController
 
 		is.close();
 		os.close();
+	}
+	
+	
+	public void saveResults(JTextArea out)
+	{
+	try
+	{
+		FileOutputStream saveStream = new FileOutputStream(saveFile);
+		ObjectOutputStream output = new ObjectOutputStream(saveStream);
+		output.writeObject(out);
+		output.close();
+		saveStream.close();
+	}
+	catch(IOException error)
+	{
+		JOptionPane.showMessageDialog(appFrame, error.getMessage(), "File Error", JOptionPane.ERROR_MESSAGE);
+	}
 	}
 }
 

@@ -34,11 +34,10 @@ public class WebPanel extends JPanel
     private JLabel logo;
 
     private JButton searchButton;
+    private JButton saveButton;
 	
 	private JScrollPane itemScroll;
 	private JTextArea itemsText;
-
-	private StyledDocument doc;
 	
 	public WebPanel(GUIController appController)
 	{
@@ -46,49 +45,37 @@ public class WebPanel extends JPanel
         this.appController = appController;
         appLayout = new SpringLayout();
         this.itemScroll = new JScrollPane();
-        appLayout.putConstraint(SpringLayout.NORTH, itemScroll, -346, SpringLayout.SOUTH, this);
-        appLayout.putConstraint(SpringLayout.WEST, itemScroll, 26, SpringLayout.WEST, this);
-        appLayout.putConstraint(SpringLayout.SOUTH, itemScroll, -23, SpringLayout.SOUTH, this);
-        appLayout.putConstraint(SpringLayout.EAST, itemScroll, -24, SpringLayout.EAST, this);
-        
         this.desiredItem = new JTextField();
-        
         this.desiredFromPrice = new JTextField();
         this.itemsText = new JTextArea();
+        itemsText.setEditable(false);
+        itemsText.setText("test text");
         itemScroll.setViewportView(itemsText);
-        appLayout.putConstraint(SpringLayout.NORTH, itemsText, 79, SpringLayout.SOUTH, searchButton);
-        appLayout.putConstraint(SpringLayout.WEST, itemsText, 165, SpringLayout.WEST, this);
-        appLayout.putConstraint(SpringLayout.SOUTH, itemsText, -98, SpringLayout.SOUTH, this);
-        appLayout.putConstraint(SpringLayout.EAST, itemsText, 0, SpringLayout.EAST, toLabel);
         //this.itemsText = new JTextArea(20,20);
-        
         itemsText.setLineWrap(true);
         itemsText.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         itemsText.setColumns(100);
         itemsText.setRows(7);
-        
         this.desiredZip = new JTextField();
-        
+        this.saveButton = new JButton("Save Results");
+        appLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, desiredZip);
+        appLayout.putConstraint(SpringLayout.EAST, saveButton, 0, SpringLayout.EAST, desiredZip);
         this.logo = new JLabel();
-        
         logo.setEnabled(false);
         //logo.setIcon(new ImageIcon(WebPanel.class.getResource("/Images/kslLogo.png")));
         this.desiredToPrice = new JTextField();
-        
+        appLayout.putConstraint(SpringLayout.WEST, saveButton, 0, SpringLayout.WEST, desiredToPrice);
         this.fromLabel = new JLabel();
-        
         this.toLabel = new JLabel();
-        
+        appLayout.putConstraint(SpringLayout.WEST, toLabel, 107, SpringLayout.EAST, fromLabel);
+        appLayout.putConstraint(SpringLayout.EAST, toLabel, 0, SpringLayout.EAST, desiredToPrice);
         this.itemLabel = new JLabel();
-        
         this.zipLabel = new JLabel();
-        
+   
         this.searchButton = new JButton();
-        appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredFromPrice);
-        appLayout.putConstraint(SpringLayout.WEST, searchButton, 188, SpringLayout.WEST, this);
-        appLayout.putConstraint(SpringLayout.EAST, searchButton, -187, SpringLayout.EAST, this);
-       
-        
+        appLayout.putConstraint(SpringLayout.EAST, searchButton, 0, SpringLayout.EAST, desiredFromPrice);
+        appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredItem);
+        appLayout.putConstraint(SpringLayout.WEST, searchButton, 0, SpringLayout.WEST, desiredItem);
         
         setupPanel();
         setupLayout();
@@ -115,6 +102,7 @@ public class WebPanel extends JPanel
 		this.add(desiredZip);
 		this.add(searchButton);
 		this.add(itemScroll);
+		this.add(saveButton);
 		      
 	}
 	
@@ -130,14 +118,12 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.NORTH, desiredToPrice, 0, SpringLayout.NORTH, desiredFromPrice);
         appLayout.putConstraint(SpringLayout.WEST, desiredToPrice, 55, SpringLayout.EAST, desiredFromPrice);
         appLayout.putConstraint(SpringLayout.EAST, desiredToPrice, -244, SpringLayout.EAST, this);
-        appLayout.putConstraint(SpringLayout.EAST, toLabel, -130, SpringLayout.WEST, zipLabel);
         appLayout.putConstraint(SpringLayout.NORTH, zipLabel, 0, SpringLayout.NORTH, fromLabel);
         appLayout.putConstraint(SpringLayout.WEST, zipLabel, 101, SpringLayout.EAST, desiredToPrice);
         appLayout.putConstraint(SpringLayout.NORTH, fromLabel, 0, SpringLayout.NORTH, itemLabel);
         appLayout.putConstraint(SpringLayout.NORTH, itemLabel, 29, SpringLayout.NORTH, this);
         appLayout.putConstraint(SpringLayout.WEST, itemLabel, 102, SpringLayout.WEST, this);
         appLayout.putConstraint(SpringLayout.NORTH, toLabel, 0, SpringLayout.NORTH, fromLabel);
-        appLayout.putConstraint(SpringLayout.WEST, toLabel, 121, SpringLayout.EAST, fromLabel);
         appLayout.putConstraint(SpringLayout.NORTH, desiredFromPrice, 6, SpringLayout.SOUTH, fromLabel);
         appLayout.putConstraint(SpringLayout.WEST, fromLabel, 86, SpringLayout.EAST, desiredItem);
         appLayout.putConstraint(SpringLayout.NORTH, logo, 0, SpringLayout.NORTH, this);
@@ -149,6 +135,14 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.NORTH, desiredItem, 49, SpringLayout.NORTH, this);
         appLayout.putConstraint(SpringLayout.WEST, desiredItem, 52, SpringLayout.WEST, this);
         appLayout.putConstraint(SpringLayout.EAST, desiredItem, -616, SpringLayout.EAST, this);
+        appLayout.putConstraint(SpringLayout.NORTH, itemsText, 79, SpringLayout.SOUTH, searchButton);
+        appLayout.putConstraint(SpringLayout.WEST, itemsText, 165, SpringLayout.WEST, this);
+        appLayout.putConstraint(SpringLayout.SOUTH, itemsText, -98, SpringLayout.SOUTH, this);
+        appLayout.putConstraint(SpringLayout.EAST, itemsText, 0, SpringLayout.EAST, toLabel);
+        appLayout.putConstraint(SpringLayout.NORTH, itemScroll, -346, SpringLayout.SOUTH, this);
+        appLayout.putConstraint(SpringLayout.WEST, itemScroll, 26, SpringLayout.WEST, this);
+        appLayout.putConstraint(SpringLayout.SOUTH, itemScroll, -23, SpringLayout.SOUTH, this);
+        appLayout.putConstraint(SpringLayout.EAST, itemScroll, -24, SpringLayout.EAST, this);
 		itemScroll.setBorder(new LineBorder(Color.BLUE));
         //doc.addStyle(name, null);
 	}
