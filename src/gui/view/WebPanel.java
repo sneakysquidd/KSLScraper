@@ -198,16 +198,25 @@ public class WebPanel extends JPanel
 				itemsText.setText("Items will appear here shortly...");
 				Item[] ItemArr = appController.searchForItem(desiredItem.getText(), desiredFromPrice.getText(), desiredToPrice.getText(), desiredZip.getText());
 				itemsText.setText("");
-				for (Item item : ItemArr)
+				
+				if (ItemArr.length > 0)
 				{
-					itemsText.append(item.getTitle() + "  " + item.getPrice() + "\n");
-					itemsText.append(item.getUrl() + "\n");
-					itemsText.append("\n");
-					
-					
-					itemsText.revalidate();
-					itemsText.repaint();
+					for (Item item : ItemArr)
+					{
+						itemsText.append(item.getTitle() + "  " + item.getPrice() + "\n");
+						itemsText.append(item.getUrl() + "\n");
+						itemsText.append("\n");
+						
+						
+						itemsText.revalidate();
+						itemsText.repaint();
+					}
 				}
+				else 
+				{
+					itemsText.setText("No Items Found!");
+				}
+				
 				
 			
 			}
