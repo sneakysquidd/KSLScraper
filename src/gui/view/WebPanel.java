@@ -35,6 +35,7 @@ public class WebPanel extends JPanel
 
     private JButton searchButton;
     private JButton saveButton;
+    private JButton loadButton;
 	
 	private JScrollPane itemScroll;
 	private JTextArea itemsText;
@@ -58,7 +59,7 @@ public class WebPanel extends JPanel
         this.desiredZip = new JTextField();
         this.saveButton = new JButton("Save Results");
         appLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, desiredZip);
-        appLayout.putConstraint(SpringLayout.EAST, saveButton, 0, SpringLayout.EAST, desiredZip);
+        appLayout.putConstraint(SpringLayout.EAST, saveButton, -187, SpringLayout.EAST, desiredZip);
         this.logo = new JLabel();
         logo.setEnabled(false);
         //logo.setIcon(new ImageIcon(WebPanel.class.getResource("/Images/kslLogo.png")));
@@ -70,7 +71,7 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.EAST, toLabel, 0, SpringLayout.EAST, desiredToPrice);
         this.itemLabel = new JLabel();
         this.zipLabel = new JLabel();
-   
+        this.loadButton = new JButton("Load Previous Results");
         this.searchButton = new JButton();
         appLayout.putConstraint(SpringLayout.EAST, searchButton, 0, SpringLayout.EAST, desiredFromPrice);
         appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredItem);
@@ -176,7 +177,14 @@ public class WebPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				appController.saveAs(itemsText);
+				try 
+				{
+					appController.saveAs(itemsText);
+				} catch (Exception e) 
+				{
+					
+					e.printStackTrace();
+				}
 				System.out.println("saved");
 			}
 		});

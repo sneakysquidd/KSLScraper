@@ -158,8 +158,9 @@ public class GUIController
 	}
 	
 	
-	public void saveAs(JTextArea textArea) {
-	      FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Text File", "txt");
+	public void saveAs(JTextArea textArea) throws Exception
+	{
+	      FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Results File", "ksl");
 	      final JFileChooser saveAsFileChooser = new JFileChooser();
 	      saveAsFileChooser.setApproveButtonText("Save");
 	      saveAsFileChooser.setFileFilter(extensionFilter);
@@ -169,32 +170,24 @@ public class GUIController
 	         return;
 	      }
 
-	      //File fileName = new File(SaveAs.getSelectedFile() + ".txt");
 	      File file = saveAsFileChooser.getSelectedFile();
-	      if (!file.getName().endsWith(".txt")) 
+	      if (!file.getName().endsWith(".ksl")) 
 	      {
-	         file = new File(file.getAbsolutePath() + ".txt");
+	         file = new File(file.getAbsolutePath() + ".ksl");
 	      }
 
-	      BufferedWriter outFile = null;
+	      FileOutputStream fout=new FileOutputStream(file);  
+	      ObjectOutputStream out=new ObjectOutputStream(fout); 
 	      try 
 	      {
-	         outFile = new BufferedWriter(new FileWriter(file));
-
-	         textArea.write(outFile);
+	         out.writeObject(textArea);
+	         out.flush();
+	         out.close();
 
 	      } catch (IOException ex) 
 	      {
 	         ex.printStackTrace();
-	      } finally {
-	         if (outFile != null) 
-	         {
-	            try 
-	            {
-	               outFile.close();
-	            } catch (IOException e) {}
-	         }
-	      }
+	      } 
 	   }
 }
 
