@@ -39,7 +39,7 @@ public class GUIController
 	
 	public void start()
 	{
-		searchForItem("iphone", "1", "2", "84020");
+		//searchForItem("iphone", "1", "2", "84020");
 	}
 
 
