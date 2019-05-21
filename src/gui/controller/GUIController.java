@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -16,10 +17,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -189,5 +192,40 @@ public class GUIController
 	         ex.printStackTrace();
 	      } 
 	   }
+	
+	public void loadResults(JTextArea textArea) throws Exception
+	{
+		FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Results File", "ksl");
+	      final JFileChooser loadFileChooser = new JFileChooser();
+	      loadFileChooser.setApproveButtonText("Save");
+	      loadFileChooser.setFileFilter(extensionFilter);
+	      int actionDialog = loadFileChooser.showOpenDialog(appFrame);
+	      if (actionDialog != JFileChooser.APPROVE_OPTION) 
+	      {
+	         return;
+	      }
+	      
+	      File file = loadFileChooser.getSelectedFile();
+	      if (!file.getName().endsWith(".ksl")) 
+	      {
+	         file = new File(file.getAbsolutePath() + ".ksl");
+	      }
+
+	      List<Object> results = new ArrayList<Object>();
+	      FileInputStream fis = new FileInputStream(file);
+	      ObjectInputStream ois = new ObjectInputStream(fis);
+
+	      try {
+	          while (true) {
+	              String result = (String) ois.readObject();
+	              textArea.appendresult);
+	          }
+	      } catch (java.io.OptionalDataException e) {
+	          if (!e.eof) 
+	              throw e;
+	      } finally {
+	          ois.close();
+	      }
+	}
 }
 
