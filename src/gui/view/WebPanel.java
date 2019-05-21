@@ -41,10 +41,19 @@ public class WebPanel extends JPanel
         this.desiredFromPrice = new JTextField();
         this.desiredZip = new JTextField();
         this.itemsText = new JTextArea("Items will appear here");
+        itemsText.setEditable(false);
         this.logo = new JLabel();
+        appLayout.putConstraint(SpringLayout.NORTH, logo, 0, SpringLayout.NORTH, itemScroll);
+        appLayout.putConstraint(SpringLayout.WEST, logo, 361, SpringLayout.EAST, itemScroll);
+        logo.setEnabled(false);
+        //logo.setIcon(new ImageIcon(WebPanel.class.getResource("/Images/kslLogo.png")));
         this.desiredToPrice = new JTextField();
         this.fromLabel = new JLabel();
+        appLayout.putConstraint(SpringLayout.EAST, fromLabel, -470, SpringLayout.EAST, this);
         this.toLabel = new JLabel();
+        appLayout.putConstraint(SpringLayout.WEST, toLabel, 121, SpringLayout.EAST, fromLabel);
+        appLayout.putConstraint(SpringLayout.SOUTH, toLabel, -6, SpringLayout.NORTH, desiredToPrice);
+        appLayout.putConstraint(SpringLayout.EAST, toLabel, -28, SpringLayout.EAST, desiredToPrice);
         this.itemLabel = new JLabel();
         this.zipLabel = new JLabel();
         this.searchButton = new JButton();
@@ -85,13 +94,8 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.NORTH, desiredToPrice, 0, SpringLayout.NORTH, desiredFromPrice);
         appLayout.putConstraint(SpringLayout.WEST, desiredToPrice, 58, SpringLayout.EAST, desiredFromPrice);
         appLayout.putConstraint(SpringLayout.EAST, desiredToPrice, -245, SpringLayout.EAST, this);
-        appLayout.putConstraint(SpringLayout.NORTH, fromLabel, 83, SpringLayout.NORTH, this);
         appLayout.putConstraint(SpringLayout.SOUTH, fromLabel, -6, SpringLayout.NORTH, desiredFromPrice);
         fromLabel.setText("Lowest Price");
-        appLayout.putConstraint(SpringLayout.EAST, fromLabel, -93, SpringLayout.WEST, toLabel);
-        appLayout.putConstraint(SpringLayout.WEST, toLabel, 0, SpringLayout.WEST, desiredToPrice);
-        appLayout.putConstraint(SpringLayout.EAST, toLabel, 0, SpringLayout.EAST, desiredToPrice);
-        appLayout.putConstraint(SpringLayout.SOUTH, toLabel, -6, SpringLayout.NORTH, desiredToPrice);
         toLabel.setText("  Highest Price");
         appLayout.putConstraint(SpringLayout.NORTH, itemLabel, 0, SpringLayout.NORTH, fromLabel);
         appLayout.putConstraint(SpringLayout.WEST, itemLabel, 103, SpringLayout.WEST, this);
@@ -102,9 +106,6 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.WEST, searchButton, 185, SpringLayout.WEST, this);
         appLayout.putConstraint(SpringLayout.EAST, searchButton, -190, SpringLayout.EAST, this);
         searchButton.setText("Search");
-        appLayout.putConstraint(SpringLayout.NORTH, logo, 51, SpringLayout.NORTH, this);
-        appLayout.putConstraint(SpringLayout.WEST, logo, 379, SpringLayout.WEST, this);
-        logo.setText("tessss");
         appLayout.putConstraint(SpringLayout.NORTH, desiredFromPrice, 0, SpringLayout.NORTH, desiredItem);
 		appLayout.putConstraint(SpringLayout.WEST, desiredFromPrice, 48, SpringLayout.EAST, desiredItem);
 		appLayout.putConstraint(SpringLayout.WEST, desiredItem, 53, SpringLayout.WEST, this);
@@ -119,8 +120,6 @@ public class WebPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.WEST, itemsText, 35, SpringLayout.WEST, this);
 		appLayout.putConstraint(SpringLayout.SOUTH, itemsText, -29, SpringLayout.SOUTH, this);
 		appLayout.putConstraint(SpringLayout.EAST, itemsText, 766, SpringLayout.WEST, this);
-        
-        logo.setIcon(new ImageIcon(WebPanel.class.getResource("/Images/kslLogo.png")));
 		
 	}
 	
