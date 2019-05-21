@@ -60,7 +60,6 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.WEST, itemsText, 165, SpringLayout.WEST, this);
         appLayout.putConstraint(SpringLayout.SOUTH, itemsText, -98, SpringLayout.SOUTH, this);
         appLayout.putConstraint(SpringLayout.EAST, itemsText, 0, SpringLayout.EAST, toLabel);
-        itemsText.setText("Items will appear here shortly...");
         //this.itemsText = new JTextArea(20,20);
         
         itemsText.setLineWrap(true);
@@ -162,13 +161,15 @@ public class WebPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
+				itemsText.setText("Items will appear here shortly...");
 				Item[] ItemArr = appController.searchForItem(desiredItem.getText(), desiredFromPrice.getText(), desiredToPrice.getText(), desiredZip.getText());
-				
+				itemsText.setText("");
 				for (Item item : ItemArr)
 				{
-					itemsText.append(item.getTitle());
-					itemsText.append(item.getPrice());
-					itemsText.append(item.getUrl());
+					itemsText.append(item.getTitle() + "  " + item.getPrice() + "\n");
+					itemsText.append(item.getUrl() + "\n");
+					itemsText.append("\n");
+					
 					
 					itemsText.revalidate();
 					itemsText.repaint();
