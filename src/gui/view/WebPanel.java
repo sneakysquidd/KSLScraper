@@ -42,7 +42,7 @@ public class WebPanel extends JPanel
 	public WebPanel(GUIController appController)
 	{
 		super();
-		setBackground(new Color(102, 204, 255));
+		setBackground(new Color(153, 204, 255));
         this.appController = appController;
         appLayout = new SpringLayout();
         this.itemScroll = new JScrollPane();
