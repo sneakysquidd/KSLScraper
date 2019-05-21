@@ -22,7 +22,6 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.net.URLConnection;
 
 import gui.model.Item;
 import gui.view.WebFrame;
@@ -44,10 +43,10 @@ public class GUIController
 	}
 
 
-	public void searchForItem(String Item, String fromPrice, String toPrice, String zipCode)
+	public Item[] searchForItem(String Item, String fromPrice, String toPrice, String zipCode)
 	{
 		final WebClient client = new WebClient(BrowserVersion.CHROME);
-
+		Item[] ItemArr = new Item[1000];
 
 		try
 		{
@@ -62,7 +61,7 @@ public class GUIController
 
             //removes index 0 because it is just the search results section
             items.remove(0);
-            Item[] ItemArr = new Item[items.size()];
+            ItemArr = new Item[items.size()];
 
 
 			if(items.isEmpty())
@@ -112,6 +111,7 @@ public class GUIController
 					    System.out.println(image);
 					    //saveImage(image, "./images");
                         ItemArr[i].setImage((image));
+                        
 				}
 			}
 		}
@@ -119,6 +119,7 @@ public class GUIController
 		{
 		  e.printStackTrace();
 		}
+		return ItemArr;
 	}
 
 

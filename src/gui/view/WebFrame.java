@@ -25,7 +25,7 @@ public class WebFrame extends JFrame
 	{
 		this.setContentPane(appPanel);
 		this.setSize(800, 800);
-		this.setTitle("Final");
+		this.setTitle("KSL Search");
 		this.setResizable(false);
 		this.setVisible(true);
 	}
