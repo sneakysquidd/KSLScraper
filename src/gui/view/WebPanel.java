@@ -1,20 +1,14 @@
 package gui.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.text.StyledDocument;
-
 import gui.controller.GUIController;
 import gui.model.Item;
-
-import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.awt.event.ActionEvent;
+import java.io.*;
 
 public class WebPanel extends JPanel
 {
@@ -63,23 +57,13 @@ public class WebPanel extends JPanel
         logo.setEnabled(false);
         //logo.setIcon(new ImageIcon(WebPanel.class.getResource("/Images/kslLogo.png")));
         this.desiredToPrice = new JTextField();
-        appLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, desiredToPrice);
         this.fromLabel = new JLabel();
         this.toLabel = new JLabel();
-        appLayout.putConstraint(SpringLayout.WEST, toLabel, 107, SpringLayout.EAST, fromLabel);
-        appLayout.putConstraint(SpringLayout.EAST, toLabel, 0, SpringLayout.EAST, desiredToPrice);
         this.itemLabel = new JLabel();
         this.zipLabel = new JLabel();
         this.loadButton = new JButton("Load Previous Results");
-        appLayout.putConstraint(SpringLayout.WEST, loadButton, 611, SpringLayout.WEST, this);
-        appLayout.putConstraint(SpringLayout.EAST, saveButton, -55, SpringLayout.WEST, loadButton);
-        this.searchButton = new JButton();
-        appLayout.putConstraint(SpringLayout.WEST, saveButton, 55, SpringLayout.EAST, searchButton);
-        appLayout.putConstraint(SpringLayout.NORTH, loadButton, 0, SpringLayout.NORTH, searchButton);
-        appLayout.putConstraint(SpringLayout.EAST, searchButton, 0, SpringLayout.EAST, desiredFromPrice);
-        appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredItem);
-        appLayout.putConstraint(SpringLayout.WEST, searchButton, 0, SpringLayout.WEST, desiredItem);
-        
+                this.searchButton = new JButton();
+                
         setupPanel();
         setupLayout();
         setupListeners();
@@ -147,6 +131,17 @@ public class WebPanel extends JPanel
         appLayout.putConstraint(SpringLayout.SOUTH, itemScroll, -23, SpringLayout.SOUTH, this);
         appLayout.putConstraint(SpringLayout.EAST, itemScroll, -24, SpringLayout.EAST, this);
 		itemScroll.setBorder(new LineBorder(Color.BLUE));
+		appLayout.putConstraint(SpringLayout.WEST, loadButton, 611, SpringLayout.WEST, this);
+        appLayout.putConstraint(SpringLayout.EAST, saveButton, -55, SpringLayout.WEST, loadButton);
+        appLayout.putConstraint(SpringLayout.WEST, toLabel, 107, SpringLayout.EAST, fromLabel);
+        appLayout.putConstraint(SpringLayout.EAST, toLabel, 0, SpringLayout.EAST, desiredToPrice);
+        appLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, desiredToPrice);
+		appLayout.putConstraint(SpringLayout.WEST, saveButton, 55, SpringLayout.EAST, searchButton);
+        appLayout.putConstraint(SpringLayout.NORTH, loadButton, 0, SpringLayout.NORTH, searchButton);
+        appLayout.putConstraint(SpringLayout.EAST, searchButton, 0, SpringLayout.EAST, desiredFromPrice);
+        appLayout.putConstraint(SpringLayout.NORTH, searchButton, 6, SpringLayout.SOUTH, desiredItem);
+        appLayout.putConstraint(SpringLayout.WEST, searchButton, 0, SpringLayout.WEST, desiredItem);
+
         //doc.addStyle(name, null);
 	}
 	

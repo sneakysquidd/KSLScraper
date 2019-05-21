@@ -3,10 +3,8 @@ package gui.controller;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.*;
+import java.util.*;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -218,7 +216,7 @@ public class GUIController
 	      try {
 	          while (true) {
 	              String result = (String) ois.readObject();
-	              textArea.appendresult);
+	              textArea.append(result);
 	          }
 	      } catch (java.io.OptionalDataException e) {
 	          if (!e.eof) 
