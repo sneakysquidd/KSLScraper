@@ -14,7 +14,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
@@ -28,13 +31,15 @@ import gui.model.Item;
 import gui.view.WebFrame;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUIController
 {
 	private WebFrame appFrame;
-	private String saveFile = "searchResults.txt";
+	private String saveFile = "searchResults.ksl";
 	
 	public GUIController()
 	{
@@ -56,7 +61,7 @@ public class GUIController
 		{
 		  String searchUrl = "https://classifieds.ksl.com/search?category[]=&subCategory[]=&keyword=%24" + Item + "&priceFrom=%24" + fromPrice + "&priceTo=" + toPrice + "&zip=" + zipCode + "&miles=25&sellerType[]=&marketType[]=Sale&hasPhotos[]=&postedTime[]=";
 		  HtmlPage page = client.getPage(searchUrl);
-		  System.out.println(searchUrl);
+		  //System.out.println(searchUrl);
 
 
 		    //gets all the sections with items in them.
@@ -80,13 +85,13 @@ public class GUIController
 					//Block to get the anchors/links for the item at the current index
 					final List<HtmlAnchor> anchors = page.getByXPath("//a[@class='listing-item-link']");
 						String itemUrl = "https://classifieds.ksl.com" + (anchors.get(i)).getHrefAttribute();
-						System.out.println(itemUrl);
+						//System.out.println(itemUrl);
                         ItemArr[i].setUrl(itemUrl);
 
 					//Block to get the title for item at the current index
 					final List<HtmlElement> titles = page.getByXPath("//div[@class='item-info-title-link']");
 					    String title = (titles.get(i)).getTextContent();
-					    System.out.println(title);
+					   // System.out.println(title);
                         ItemArr[i].setTitle(title);
 
 					//Block to get the price for the item at the current index
@@ -96,7 +101,7 @@ public class GUIController
 					    {
 						    price = (prices.get(i+1)).getTextContent();
 					    }
-					    System.out.println(price);
+					    //System.out.println(price);
 					    ItemArr[i].setPrice(price);
 
 
@@ -112,7 +117,7 @@ public class GUIController
 					    {
 						    image = "https://" + (imgs.get(i+1).getAttribute("src"));
 					    }
-					    System.out.println(image);
+					   // System.out.println(image);
 					    //saveImage(image, "./images");
                         ItemArr[i].setImage((image));
                         
@@ -153,20 +158,43 @@ public class GUIController
 	}
 	
 	
-	public void saveResults(JTextArea out)
-	{
-	try
-	{
-		FileOutputStream saveStream = new FileOutputStream(saveFile);
-		ObjectOutputStream output = new ObjectOutputStream(saveStream);
-		output.writeObject(out);
-		output.close();
-		saveStream.close();
-	}
-	catch(IOException error)
-	{
-		JOptionPane.showMessageDialog(appFrame, error.getMessage(), "File Error", JOptionPane.ERROR_MESSAGE);
-	}
-	}
+	public void saveAs(JTextArea textArea) {
+	      FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Text File", "txt");
+	      final JFileChooser saveAsFileChooser = new JFileChooser();
+	      saveAsFileChooser.setApproveButtonText("Save");
+	      saveAsFileChooser.setFileFilter(extensionFilter);
+	      int actionDialog = saveAsFileChooser.showOpenDialog(appFrame);
+	      if (actionDialog != JFileChooser.APPROVE_OPTION) 
+	      {
+	         return;
+	      }
+
+	      //File fileName = new File(SaveAs.getSelectedFile() + ".txt");
+	      File file = saveAsFileChooser.getSelectedFile();
+	      if (!file.getName().endsWith(".txt")) 
+	      {
+	         file = new File(file.getAbsolutePath() + ".txt");
+	      }
+
+	      BufferedWriter outFile = null;
+	      try 
+	      {
+	         outFile = new BufferedWriter(new FileWriter(file));
+
+	         textArea.write(outFile);
+
+	      } catch (IOException ex) 
+	      {
+	         ex.printStackTrace();
+	      } finally {
+	         if (outFile != null) 
+	         {
+	            try 
+	            {
+	               outFile.close();
+	            } catch (IOException e) {}
+	         }
+	      }
+	   }
 }
 

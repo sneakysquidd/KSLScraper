@@ -49,7 +49,6 @@ public class WebPanel extends JPanel
         this.desiredFromPrice = new JTextField();
         this.itemsText = new JTextArea();
         itemsText.setEditable(false);
-        itemsText.setText("test text");
         itemScroll.setViewportView(itemsText);
         //this.itemsText = new JTextArea(20,20);
         itemsText.setLineWrap(true);
@@ -172,6 +171,14 @@ public class WebPanel extends JPanel
 			
 			}
 				});
-				
+		
+		saveButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				appController.saveAs(itemsText);
+				System.out.println("saved");
+			}
+		});
 	}
 }
